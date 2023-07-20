@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # devise_for :users
+  root 'splash#splash'
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  devise_scope :user do
+    get '/users/sign_out', to: 'devise/sessions#destroy'
+  end
+
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
+
+  resources :categories do
+    resources :records, only: %i[index new create]
+  end
 end
