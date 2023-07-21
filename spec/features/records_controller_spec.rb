@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe RecordsController, type: :controller do
   let(:user) { FactoryBot.create(:user) }
-  let(:category) { FactoryBot.create(:category, user: user) }
+  let(:category) { FactoryBot.create(:category, user:) }
 
   before do
     sign_in user

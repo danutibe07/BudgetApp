@@ -45,9 +45,9 @@ RSpec.describe CategoriesController, type: :controller do
     context 'with invalid parameters' do
       it 'does not create a new category' do
         sign_in user
-        expect {
+        expect do
           post :create, params: { category: { name: '', icon: 'test_icon.jpg' } }
-        }.to_not change(Category, :count)
+        end.to_not change(Category, :count)
       end
 
       it 'renders the new template' do
