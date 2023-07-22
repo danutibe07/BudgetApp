@@ -1,0 +1,20 @@
+<div class="col header2">
+  <div class="row">
+    <div class="col-4 col1">
+      <%= link_to categories_path do %>
+        <%= image_tag 'back-arrow.png', alt: 'Back', class: 'back-icon' %>
+      <% end %>
+    </div>
+    <div class="col col2">TRANSACTIONS</div>
+  </div>
+</div>
+<div class="container-fluid flld">
+  <div class="row gift">
+    <div class="col">
+      <h4>Gift Credit</h4>
+    </div>
+    <div class="col sec">
+      <h4><%= number_to_currency(@total_amount, unit: '$') %></h4>
+    </div>
+  </div>
+</div>

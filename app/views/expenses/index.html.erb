@@ -1,0 +1,23 @@
+<p style="color: green"><%= notice %></p>
+<div class="container">
+
+  <% @categories.each do |category| %>
+    
+    <div class="row category-total">
+   
+      <div class="col expense">
+      <% category.expenses.each do |expense| %>
+        <%= render expense %>
+       
+        </div>
+        <div class="col expense">
+          <%= link_to "Show this expense", expense %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <%= link_to "New expense", new_expense_path %> </br>
+<%= link_to "Back", categories_path %>
+</div>
+
+
