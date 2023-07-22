@@ -1,32 +1,37 @@
-<div class="navbar">
-  <label for="navbar-toggle" class="navbarlabel">
-    <span></span>
-    <span></span>
-    <span></span>
-  </label>
-  <div>
-    <h2>Categories</h2>
-  </div>
-    <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "btn btn-primary" %>
-</div>
+<div class="container-fluid catag">
+  <div class="row ">
+    <% @categories.each do |category| %>
+      <div class="row catago" onclick="window.location.href='<%= category.expenses.present? ? expense_path(category.expenses.first) : expenses_path(category_id: category.id) %>';">
+        <div class="col">
+          <div class="image-container">
+          <% if category.icon.attached? %>
+          <%= image_tag category.icon, class: "category-icon img-fluid" %>
+        <% else %>
+          <p>No Image</p>
+        <% end %>
+          </div>
+        </div>
 
-<main class="main" >
-<% @categories.each do |category| %>
-  <div class="category-card">
-    <div class="category-info">
-      <img src="/assets/category-icon.png" alt="Category Icon" class="category_icon">
-      <div class="category_details">
-        <h2><%= category.name %></h2>
-        <p>Total Amount: <%= number_to_currency(category.records.sum(:amount)) %></p>
+        <div class="col">
+          <p><%= category.name %></p>
+          <% created_date = category.created_at.strftime('%e%p %B %Y').strip %>
+          <% formatted_date = created_date.sub(/\d+(st|nd|rd|th)/, '\1') %>
+          <p><%= formatted_date %></p>
+        </div>
+
+        <div class="col">
+          <% expense = category.expenses.first %>
+          <% if expense %>
+            <p><%= number_to_currency(expense.amount, unit: '$') %></p>
+          <% else %>
+            <p>No Expense</p>
+          <% end %>
+        </div>
       </div>
-    </div>
-    <%= link_to 'View Transactions', category_records_path(category), class: 'btn btn-primary' %>
-    <%= link_to 'Delete', category, method: :delete, data: { confirm: 'Are you sure you want to delete this category?' }, class: 'btn btn-danger' %>
-  </div>
-<% end %>
-
-<div class="add_transaction">
-  <%= link_to "Add a New Category", new_category_path, class: "add_transaction_btn" %>
+    <% end %>
+    <div class="btn-new">
+  <%= link_to "New category", new_category_path, class:"neew" %>
+  </div> 
 </div>
-
-</main>
+  </div>
+  

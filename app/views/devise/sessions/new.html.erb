@@ -1,23 +1,41 @@
-<% content_for :back_path, root_path %>
-<% content_for :page_name, "LOGIN" %>
-<% content_for :nav_button do %>
-<%= button_tag "Log in", type: "submit", form: "new_user", class: "navbtn" %>
-<% end %>
+<div class="col header2">
+  <div class="row">
+    <div class="col-4 col1">
+      <%= link_to root_path do %>
+        <%= image_tag 'back-arrow.png', alt: 'Back', class: 'back-icon' %>
+      <% end %>
+    </div>
+    <div class="col col22">LOG IN</div>
+    <div class="col col2">
+      <a href="#" id="login-button">Next</a>
+    </div>
+  </div>
+</div>
+</br>
 
-<%= render partial: 'user/shared/navbar' %>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { id: 'login-form' }) do |f| %>
+  <div class="field form-group">
     <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email" %>
   </div>
 
-  <div class="mb-3">
+  <div class="field form-group">
     <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password" %>
   </div>
-
+</div>
+</br>
+<div class="lnk">
   <% if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-      <div class="forgot" >
-    <%= link_to "Forgot password?", new_password_path(resource_name) %>
-  </div>
+    <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
   <% end %>
-<% end %>
+</div>
+<% end %> <!-- Move the closing tag of the form to this position -->
+</div> <!-- Closing tag for the "col header2" div -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const loginButton = document.getElementById('login-button');
+  const loginForm = document.getElementById('login-form');
+  loginButton.addEventListener('click', function() {
+    loginForm.submit();
+  });
+});
+</script>

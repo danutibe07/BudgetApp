@@ -1,22 +1,8 @@
-<div class="form_container">
-  <div class="navbar">
-  <i class="fas fa-arrow-left"></i>
-  <span class="sr-only">Back</span>
-  <h2>New Category</h2>
-    <%= form_for @category, html: { class: "navbar-form" } do |f| %>
-    <%= link_to categories_path do %>
-  <%= f.submit "Next", class: "btn btn-primary" %>
-<% end %>
-<% end %>
 
+<%= render "form", category: @category %>
 
-  </div>
+<br>
 
-  <%= form_for @category, html: { class: "navbar-form" } do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-    <%= f.label :icon %>
-    <%= f.text_field :icon %>
-  <% end %>
-
+<div>
+  
 </div>
