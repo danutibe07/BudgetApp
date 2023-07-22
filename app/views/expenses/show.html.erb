@@ -1,0 +1,48 @@
+<p style="color: green"><%= notice %></p>
+<%= render "expenses/header" %>
+
+<div class="container-fluid new">
+  <div class="row new3">
+
+    <div class="col-12">
+      <div class="d-flex ">
+        <div class=" col image-container">
+          <% if @category.icon.attached? %>
+            <%= image_tag @category.icon, class: "category-icon img-fluid" %>
+          <% else %>
+            <p>No Image</p>
+          <% end %>
+        </div>
+
+        <div class="col nameex">
+          <h3><%= @category.name %></h3>
+          <p><%= @category.created_at.strftime('%e%p %B %Y').strip %></p>
+        </div>
+
+        <div class="col ml-3 nameex2 ">
+        <% if @category.expenses.present? %>
+          <% @expenses.each do |expense| %>
+              <div class="mt-3">
+                <h5><%= number_to_currency(expense.amount, unit: '$') %></h5>
+              </div>
+              <div class="col">
+                <%= link_to expense, method: :delete, class:'btn', data: { confirm: 'Are you sure?' } do %>
+                  <%= image_tag 'blue-delete.png', alt: 'Delete', class: 'delete-icon' %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p>No expenses for this category.</p>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+<footer class="container-fluid">
+  <div class="justify-content-center new2">
+    <%= link_to "Create Expense", new_expense_path(category_id: @category.id), class: "btn cl" %>
+  </div>
+</footer>

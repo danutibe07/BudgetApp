@@ -1,0 +1,37 @@
+<div class="container-fluid catag">
+  <div class="row ">
+    <% @categories.each do |category| %>
+      <div class="row catago" onclick="window.location.href='<%= category.expenses.present? ? expense_path(category.expenses.first) : expenses_path(category_id: category.id) %>';">
+        <div class="col">
+          <div class="image-container">
+          <% if category.icon.attached? %>
+          <%= image_tag category.icon, class: "category-icon img-fluid" %>
+        <% else %>
+          <p>No Image</p>
+        <% end %>
+          </div>
+        </div>
+
+        <div class="col">
+          <p><%= category.name %></p>
+          <% created_date = category.created_at.strftime('%e%p %B %Y').strip %>
+          <% formatted_date = created_date.sub(/\d+(st|nd|rd|th)/, '\1') %>
+          <p><%= formatted_date %></p>
+        </div>
+
+        <div class="col">
+          <% expense = category.expenses.first %>
+          <% if expense %>
+            <p><%= number_to_currency(expense.amount, unit: '$') %></p>
+          <% else %>
+            <p>No Expense</p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <div class="btn-new">
+  <%= link_to "New category", new_category_path, class:"neew" %>
+  </div> 
+</div>
+  </div>
+  
